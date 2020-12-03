@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'SourcesansPro';
+    src: local('SourcesansPro Regular'), local('SourcesansPro-Regular'),
+        url('sourcesanspro-regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
