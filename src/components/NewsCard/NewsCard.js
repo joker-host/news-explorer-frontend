@@ -25,7 +25,7 @@ function NewsCard({
   const [activeFlag, setActiveFlag] = useState(false);
   useEffect(() => {
     if (loggedIn) {
-      if (savedArticles) {
+      if (savedArticles.savedArticles) {
         setActiveFlag(
           savedArticles.find((i) => i.title === cardTitle) !== undefined,
         );
