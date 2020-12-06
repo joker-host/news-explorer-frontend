@@ -71,7 +71,7 @@ function App() {
 
   useEffect(() => {
     loadSavedArticles();
-  }, []);
+  }, [loggedIn, history]);
 
   const [keyWord, setKeyWord] = useState('');
   const [articles, setArticles] = useState({ articlesArr: [], showSection: false });

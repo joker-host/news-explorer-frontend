@@ -13,13 +13,15 @@ function SavedNewsHeader(savedArticles) {
   const [keywords, setKeyWords] = useState('');
 
   useEffect(() => {
-    const words = savedArticles.savedArticles.map((article) => (article.keyword));
-    const uniqueWords = words.filter((item, pos) => words.indexOf(item) == pos);
-    setKeyWords(uniqueWords);
+    if(savedArticles.savedArticles.length > 0) {
+      const words = savedArticles.savedArticles.map((article) => (article.keyword));
+      const uniqueWords = words.filter((item, pos) => words.indexOf(item) == pos);
+      setKeyWords(uniqueWords);
+    }
   }, [savedArticles]);
 
   return (
-    <section className="saved-news-info">
+    <section className="saved-news-info" onClick={console.log(savedArticles.savedArticles)}>
       <h2 className="saved-news-info__title">Сохранённые статьи</h2>
       <h3 className="saved-news-info__quantity">
         {
