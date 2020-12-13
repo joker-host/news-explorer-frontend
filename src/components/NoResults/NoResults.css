@@ -1,7 +1,6 @@
 .search-without-results {
     height: 374px;
-    /* display: flex; */
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;

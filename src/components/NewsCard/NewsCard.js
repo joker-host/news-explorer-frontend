@@ -25,12 +25,17 @@ function NewsCard({
   const [activeFlag, setActiveFlag] = useState(false);
   useEffect(() => {
     if (loggedIn) {
-      if (savedArticles.savedArticles) {
+      if (savedArticles.length > 0) {
         setActiveFlag(
           savedArticles.find((i) => i.title === cardTitle) !== undefined,
         );
+      } else {
+        setActiveFlag(false);
       }
+    } else {
+      setActiveFlag(false);
     }
+    
   }, [savedArticles, cardTitle, activeFlag, loggedIn]);
 
   const keyWordForSave = localStorage.getItem('keyWordForSave') || 'Без ключевого слова';
@@ -81,8 +86,6 @@ function NewsCard({
   }
 
   function modifyArticle() {
-    // console.log(savedArticles)
-
     const savedArticle = savedArticles.find((i) => {
       if (myArticle) {
         return i.title === myArticle.title && i.text === myArticle.text;
@@ -92,10 +95,7 @@ function NewsCard({
         return i.title === article.title && i.text === article.description;
       }
     });
-    // console.log(savedArticle)
     if (savedArticle) {
-      // console.log(savedArticle._id)
-      // console.log(myArticle)
       deleteArticle(savedArticle._id);
     } else {
       saveArticle();

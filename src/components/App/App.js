@@ -54,6 +54,7 @@ function App() {
   function logOut() {
     localStorage.removeItem('jwt');
     setLoggedIn(localStorage.isLoggedIn = false);
+    setSavedArticles([]);
   }
 
   const [savedArticles, setSavedArticles] = useState([]);
@@ -75,12 +76,20 @@ function App() {
 
   const [keyWord, setKeyWord] = useState('');
   const [articles, setArticles] = useState({ articlesArr: [], showSection: false });
+  const [showNoResults, setShowNoResults] = useState(false);
   function onSubmitSearchForm(e) {
     setIsLoading(true);
     e.preventDefault();
     newsApi
       .getArticles(keyWord)
       .then((res) => {
+        if(res.totalResults === 0) {
+          setShowNoResults(true);
+        } else {
+          setShowNoResults(false);
+        }
+        setArticles({ articlesArr: [], showSection: false });
+        localStorage.removeItem('articles');
         localStorage.setItem('keyWordForSave', keyWord.charAt(0).toUpperCase() + keyWord.slice(1));
         setIsLoading(false);
         setArticles({ articlesArr: res.articles, itemToShow: 3, showSection: true });
@@ -164,6 +173,7 @@ function App() {
     resetError();
     handleToolipPopup();
     setIsLoginPopupOpen(true);
+    setIsRegisterPopupOpen(false);
   }
 
   /// //////////////////////////////////////валидация
@@ -181,6 +191,8 @@ function App() {
   const [registerFormValid, SetRegisterFormValid] = useState(false);
   const [loginFormValid, SetLoginFormValid] = useState(false);
 
+  const [wrongPassword, setWrongPassword] = useState('');
+
   function resetError() {
     setEmailDirty(false);
     setPasswordDirty(false);
@@ -190,6 +202,7 @@ function App() {
     setEmail('');
     setPassword('');
     setName('');
+    setWrongPassword('');
   }
 
   useEffect(() => {
@@ -273,6 +286,7 @@ function App() {
               loggedIn={loggedIn}
               savedArticles={savedArticles}
               setSavedArticles={setSavedArticles}
+              showNoResults={showNoResults}
             />
             <Footer />
           </Route>
@@ -332,6 +346,8 @@ function App() {
           email={email}
           password={password}
           loginFormValid={loginFormValid}
+          wrongPassword={wrongPassword}
+          setWrongPassword={setWrongPassword}
         />
         <BurgerPopup
           loggedIn={loggedIn}

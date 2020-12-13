@@ -21,7 +21,7 @@ function SavedNewsHeader(savedArticles) {
   }, [savedArticles]);
 
   return (
-    <section className="saved-news-info" onClick={console.log(savedArticles.savedArticles)}>
+    <section className="saved-news-info">
       <h2 className="saved-news-info__title">Сохранённые статьи</h2>
       <h3 className="saved-news-info__quantity">
         {
@@ -29,7 +29,7 @@ function SavedNewsHeader(savedArticles) {
         }
       </h3>
       {
-        keywords.length > 0
+        savedArticles.savedArticles.length > 0
           ? <p className="saved-news-info__description">По ключевым словам: <span className="saved-news-info__bold">{keywords.length < 4 ? keywords[0] + (keywords[1] ? `, ${keywords[1]}` : '') + (keywords[2] ? `, ${keywords[2]}` : '') : `${keywords[0]}, ${keywords[1]}`}</span>{keywords.length > 3 ? ' и ' : ''}{keywords.length > 3 ? <span className="saved-news-info__bold">{`${keywords.length - 2}-м `}</span> : ''}{keywords.length > 3 ? 'другим' : ''}</p>
           : ''
       }

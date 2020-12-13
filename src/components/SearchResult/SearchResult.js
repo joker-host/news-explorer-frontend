@@ -6,7 +6,7 @@ import placeholderImage from '../../images/news_1.png';
 import NewsCard from '../NewsCard/NewsCard';
 
 function SearchResult({
-  articles, setArticles, loggedIn, savedArticles, setSavedArticles,
+  articles, setArticles, loggedIn, savedArticles, setSavedArticles
 }) {
   const [esleButtonShow, setEsleButtonShow] = useState(true);
 
@@ -83,13 +83,10 @@ function SearchResult({
             ? <section className="search-results">
               <div className="search-results__cards">
                 {
-                  // console.log(savedArticles)
-                  // savedArticles.map(({ date, image, keyword, link, source, text, title, _id }) =>
                   savedArticles.length > 0
                     ? (savedArticles.map((article) => <NewsCard
                       myArticle={article}
                       key={article._id}
-                      // cardImage={urlToImage ? urlToImage : placeholderImage}
                       cardImage={article.image}
                       cardDate={article.date}
                       cardTitle={article.title}
@@ -98,12 +95,10 @@ function SearchResult({
                       onClickArticle={article.link}
                       keyWord={article.keyword}
                       _id={article._id}
-                      // id={article._id}
                       articles={articles}
                       savedArticles={savedArticles}
                       setArticles={setArticles}
                       setSavedArticles={setSavedArticles}
-                      // loggedIn={loggedIn}
                     />)) : ''
                 }
               </div>

@@ -19,6 +19,8 @@ function LoginPopup({
   email,
   password,
   loginFormValid,
+  wrongPassword,
+  setWrongPassword
 }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -30,6 +32,7 @@ function LoginPopup({
           onClose();
         } else if (data.message) {
           console.log(data.message);
+          setWrongPassword(data.message)
         }
       })
       .catch((err) => {
@@ -83,6 +86,8 @@ function LoginPopup({
               onBlur={(e) => blurHandler(e)}
             />
             {(passwordError && passwordDirty) && <span id='email-input-error' className='popup__input-error'>{passwordError}</span>}
+            {(passwordError && passwordDirty) && <span id='email-input-error' className='popup__input-error'>{passwordError}</span>}
+            {wrongPassword ? <span id='email-input-error' className='popup__input-error'>{wrongPassword}</span> : ''}
           </label>
         </div>
         <button type="submit" className={'popup__save-button popup__save-button_login'} disabled={!loginFormValid}>Войти</button>
