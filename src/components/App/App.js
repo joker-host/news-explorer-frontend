@@ -36,11 +36,12 @@ function App() {
       mainApi
         .getContent(jwt)
         .then((res) => {
-          if (res) {
+          if (res._id && res.email && res.name) {
             setCurrentUser({ name: res.name, _id: res._id });
             setLoggedIn(localStorage.isLoggedIn = true);
           } else {
             localStorage.removeItem('jwt');
+            setLoggedIn(localStorage.isLoggedIn = false);
           }
         })
         .catch((err) => {
@@ -103,12 +104,12 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  function closeOverlay(evt) { // закрытие попапов при нажатии на область вокруг попапа
-    if (evt.target.classList.contains('popup_opened')) {
-      closeAllPopups();
-    }
-  }
-  document.addEventListener('click', closeOverlay);
+  // function closeOverlay(evt) { // закрытие попапов при нажатии на область вокруг попапа
+  //   if (evt.target.classList.contains('popup_opened')) {
+  //     closeAllPopups();
+  //   }
+  // }
+  // document.addEventListener('click', closeOverlay);
 
   function closeOnEscape(evt) { // закрытие попапов при нажатии Escape
     if (evt.key === 'Escape') {
@@ -123,7 +124,7 @@ function App() {
     setIsLoginPopupOpen(false);
     setIsBurgerPopupOpen(false);
     document.removeEventListener('keydown', closeOnEscape);
-    document.removeEventListener('click', closeOverlay);
+    // document.removeEventListener('click', closeOverlay);
   }
 
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);

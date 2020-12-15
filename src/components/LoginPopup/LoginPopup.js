@@ -86,7 +86,6 @@ function LoginPopup({
               onBlur={(e) => blurHandler(e)}
             />
             {(passwordError && passwordDirty) && <span id='email-input-error' className='popup__input-error'>{passwordError}</span>}
-            {(passwordError && passwordDirty) && <span id='email-input-error' className='popup__input-error'>{passwordError}</span>}
             {wrongPassword ? <span id='email-input-error' className='popup__input-error'>{wrongPassword}</span> : ''}
           </label>
         </div>

@@ -12,7 +12,7 @@ function Header({
   onRegister, onBurgerMenu, loggedIn, logOut,
 }) {
   const currentUser = React.useContext(UserContext);
-  const currentUserName = currentUser.name;
+  const currentUserName = currentUser.name || 'Вы вышли';
 
   return (
     <Switch>
@@ -27,8 +27,8 @@ function Header({
               <div className="header__underline"></div>
               Главная
             </Link>
-            {loggedIn === 'true' ? <Link className="header__link" to="/saved-news">Сохраненные статьи</Link> : ''}
-            {loggedIn === 'true'
+            {loggedIn ? <Link className="header__link" to="/saved-news">Сохраненные статьи</Link> : ''}
+            {loggedIn
               ? <button type='button' className="header__logged-out-button_white" onClick={logOut}>
                 {currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}
                 <img className="header__logged-out-image" src={logout_white} alt="здесь должна быть иконка выхода из аккаунта"></img>

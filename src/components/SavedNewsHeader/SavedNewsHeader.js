@@ -5,6 +5,7 @@ import { UserContext } from '../../contexts/CurrentUserContext.js';
 
 function SavedNewsHeader(savedArticles) {
   const currentUser = React.useContext(UserContext);
+  const currentUserName = currentUser.name || 'Вы вышли';
 
   function declOfNum(n, titles) {
     return titles[n % 10 == 1 && n % 100 != 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
@@ -25,7 +26,7 @@ function SavedNewsHeader(savedArticles) {
       <h2 className="saved-news-info__title">Сохранённые статьи</h2>
       <h3 className="saved-news-info__quantity">
         {
-          `${currentUser.name.charAt(0).toUpperCase() + currentUser.name.slice(1)}, у вас ${savedArticles.savedArticles.length > 0 ? savedArticles.savedArticles.length : 'пока еще нет '} ${declOfNum(savedArticles.savedArticles.length, ['сохраненная', 'сохраненные', 'сохраненных'])} ${declOfNum(savedArticles.savedArticles.length, ['статья', 'статьи', 'статей'])}`
+          `${currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}, у вас ${savedArticles.savedArticles.length > 0 ? savedArticles.savedArticles.length : 'пока еще нет '} ${declOfNum(savedArticles.savedArticles.length, ['сохраненная', 'сохраненные', 'сохраненных'])} ${declOfNum(savedArticles.savedArticles.length, ['статья', 'статьи', 'статей'])}`
         }
       </h3>
       {
