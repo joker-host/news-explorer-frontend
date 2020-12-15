@@ -2,8 +2,6 @@ import './About.css';
 import React from 'react';
 import avatar from '../../images/me.jpg';
 
-// import { Route, Link, useHistory } from 'react-router-dom';
-
 function About() {
   return (
     <section className="about-author">

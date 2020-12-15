@@ -3,8 +3,6 @@ import './Search.css';
 import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 
-// import { Route, Link, useHistory } from 'react-router-dom';
-
 function Search({ setKeyWord, onSubmitSearchForm }) {
   return (
     <section className="search">

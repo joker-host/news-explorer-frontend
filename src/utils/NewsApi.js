@@ -2,8 +2,8 @@ import { handleResponse } from './constants.js';
 
 const moment = require('moment');
 
-const dateNow = Date.now();
-const dateFrom = moment(dateNow - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
+const dateNow = Date.now(); // Текущая дата
+const dateFrom = moment(dateNow - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD'); // 7 дней назад с текущей даты
 
 class NewsApi {
   getArticles(keyWord) {

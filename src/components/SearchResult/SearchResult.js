@@ -8,27 +8,27 @@ import NewsCard from '../NewsCard/NewsCard';
 function SearchResult({
   articles, setArticles, loggedIn, savedArticles, setSavedArticles
 }) {
-  const [esleButtonShow, setEsleButtonShow] = useState(true);
+  const [esleButtonShow, setEsleButtonShow] = useState(true); // Стейт показывающий или скрывающий кнопку "Показать еще"
 
-  function checkArrayLength() {
+  function checkArrayLength() { // Проверка массива статей, если отрисованы все, убираем кнопку "Показать еще"
     if (articles.itemToShow >= articles.articlesArr.length) {
       setEsleButtonShow(false);
     }
   }
 
-  function showMore() {
+  function showMore() { // Функция отрисовки трех дополнительных карточек
     checkArrayLength();
     setArticles({ articlesArr: articles.articlesArr, itemToShow: articles.itemToShow + 3, showSection: true });
-    checkArrayLength();
+    checkArrayLength(); // Пролистать страницу наверх
     window.scrollTo({
       top: 576,
       behavior: 'smooth',
     });
   }
 
-  useEffect(() => {
+  useEffect(() => { // Обновляет запись статей в локальном хранилище
     checkArrayLength();
-    if (articles.articlesArr.length > 0) {
+    if (articles.articlesArr.length > 0) { 
       localStorage.setItem('articles', JSON.stringify({ articlesArr: articles.articlesArr, itemToShow: articles.itemToShow, showSection: articles.showSection }));
     }
   }, [articles]);
@@ -39,16 +39,12 @@ function SearchResult({
     }
   }, []);
 
-  function test() {
-    console.log(1);
-  }
-
   return (
     <Switch>
       <Route path="/main">
         {articles.showSection
           ? <section className="search-results">
-            <h2 className="search-results__header" onClick={test}>Результаты поиска</h2>
+            <h2 className="search-results__header">Результаты поиска</h2>
             <div className="search-results__cards">
               {
                 articles.articlesArr

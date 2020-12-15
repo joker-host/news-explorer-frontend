@@ -2,12 +2,10 @@ import './SearchForm.css';
 
 import React from 'react';
 
-// import { Route, Link, useHistory } from 'react-router-dom';
-
 function SearchForm({ setKeyWord, onSubmitSearchForm }) {
-  const keyWord = localStorage.getItem('Key word');
+  const keyWord = localStorage.getItem('Key word'); // Ключевое слово в локальном хранилище
 
-  function handleChangeKeyWord(e) {
+  function handleChangeKeyWord(e) { // Меняем запись ключевого слова поиска при изменении значения в инпуте
     setKeyWord(e.target.value);
     localStorage.setItem('Key word', e.target.value);
   }

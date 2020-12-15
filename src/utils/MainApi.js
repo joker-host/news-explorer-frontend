@@ -1,7 +1,7 @@
 import { handleResponse, baseUrl } from './constants.js';
 
 class MainApi {
-  register(email, password, name) {
+  register(email, password, name) { // Запрос на регистрацию
     return fetch(`${baseUrl}/signup`, {
       method: 'POST',
       // mode: 'no-cors',
@@ -17,7 +17,7 @@ class MainApi {
       });
   }
 
-  authorize(email, password) {
+  authorize(email, password) { // Запрос на авторизацию
     return fetch(`${baseUrl}/signin`, {
       method: 'POST',
       // mode: 'no-cors',
@@ -38,7 +38,7 @@ class MainApi {
       });
   }
 
-  getContent(token) {
+  getContent(token) { // Запрос на проверку токена
     return fetch(`${baseUrl}/users/me`, {
       method: 'GET',
       // mode: 'no-cors',
@@ -54,7 +54,7 @@ class MainApi {
       });
   }
 
-  saveArticle(keyword, title, text, date, source, link, image, owner) {
+  saveArticle(keyword, title, text, date, source, link, image, owner) { // Запрос на сохранение статьи
     return fetch(`${baseUrl}/articles`, {
       method: 'POST',
       // mode: 'no-cors',
@@ -68,7 +68,7 @@ class MainApi {
     }).then(handleResponse);
   }
 
-  deleteArticle(idCard) {
+  deleteArticle(idCard) { // Запрос на удаление статьи
     return fetch(`${baseUrl}/articles/${idCard}`, {
       method: 'DELETE',
       // mode: 'no-cors',
@@ -79,7 +79,7 @@ class MainApi {
     }).then(handleResponse);
   }
 
-  getInitialArticles() {
+  getInitialArticles() { // Запрос на получение сохраненных статей пользователя
     return fetch(`${baseUrl}/articles`, {
       method: 'GET',
       // mode: 'no-cors',

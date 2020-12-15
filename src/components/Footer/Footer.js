@@ -7,7 +7,7 @@ import vk from '../../images/vk-icon.svg';
 
 function Footer() {
 
-  function scrollUp() {
+  function scrollUp() { // Скролл в начало страницы
     window.scrollTo({
       top: 0,
       behavior: 'smooth',

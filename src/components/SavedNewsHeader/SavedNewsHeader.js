@@ -7,16 +7,16 @@ function SavedNewsHeader(savedArticles) {
   const currentUser = React.useContext(UserContext);
   const currentUserName = currentUser.name || 'Вы вышли';
 
-  function declOfNum(n, titles) {
+  function declOfNum(n, titles) { // Функция определения окончаний в словах в зависимости от числительного
     return titles[n % 10 == 1 && n % 100 != 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
   }
 
-  const [keywords, setKeyWords] = useState('');
+  const [keywords, setKeyWords] = useState(''); // Стейт содержит ключевые слова для статей
 
   useEffect(() => {
     if(savedArticles.savedArticles.length > 0) {
-      const words = savedArticles.savedArticles.map((article) => (article.keyword));
-      const uniqueWords = words.filter((item, pos) => words.indexOf(item) == pos);
+      const words = savedArticles.savedArticles.map((article) => (article.keyword)); // Забираем в массив все ключевые слова из статей
+      const uniqueWords = words.filter((item, pos) => words.indexOf(item) == pos); // Удаляем повторяющиеся ключевые слова в массиве
       setKeyWords(uniqueWords);
     }
   }, [savedArticles]);

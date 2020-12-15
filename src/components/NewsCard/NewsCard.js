@@ -22,8 +22,8 @@ function NewsCard({
   savedArticles,
   setSavedArticles,
 }) {
-  const [activeFlag, setActiveFlag] = useState(false);
-  useEffect(() => {
+  const [activeFlag, setActiveFlag] = useState(false); // Стейт содержит информацию о том, сохранена ли статья пользователем
+  useEffect(() => { // Проверка, если статья найдена в массиве сохраненных статей пользователя, то перекрашиваем цвет флага в синий
     if (loggedIn) {
       if (savedArticles.length > 0) {
         setActiveFlag(
@@ -39,7 +39,7 @@ function NewsCard({
   }, [savedArticles, cardTitle, activeFlag, loggedIn]);
 
   const keyWordForSave = localStorage.getItem('keyWordForSave') || 'Без ключевого слова';
-  function saveArticle() {
+  function saveArticle() { // Запрос на сохранение статьи
     mainApi
       .saveArticle(
         keyWordForSave,
@@ -67,7 +67,7 @@ function NewsCard({
       });
   }
 
-  function deleteArticle(id) {
+  function deleteArticle(id) { // Запрос на удаление статьи
     mainApi
       .deleteArticle(id)
       .then(() => {
@@ -85,7 +85,7 @@ function NewsCard({
       });
   }
 
-  function modifyArticle() {
+  function modifyArticle() { // Проверка, если статья сохранена, то удаляем. Если не сохранена, то сохраняем
     const savedArticle = savedArticles.find((i) => {
       if (myArticle) {
         return i.title === myArticle.title && i.text === myArticle.text;
