@@ -233,6 +233,9 @@
     .header__logged-out-button {
         height: 40px;
     }
+    .header__logged-out-button_white {
+        height: 40px;
+    }
 }
 
 @media (max-width: 768px) {

@@ -6,7 +6,7 @@ function About() {
   return (
     <section className="about-author">
       <div className="about-author__avatar-wrapper">
-        <img className="about-author__avatar" src={avatar} alt="здесь должна быть аватарка создателя сайта :)"></img>
+        <img className="about-author__avatar" src={avatar} alt="здесь должна быть аватарка создателя сайта :)" />
       </div>
       <div className="about-author__description-wrapper">
         <h2 className="about-author__description-header">Об авторе</h2>

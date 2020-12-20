@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 const ProtectedRoute = ({ component: Component, handleLoginPopup, ...props }) => {
   useEffect(() => {
-    if (localStorage.isLoggedIn === 'false') { 
+    if (localStorage.isLoggedIn === 'false') {
       // Если пользователь не авторизован и хочет перейти на защищенный адрес, то открываем попап с логином
       handleLoginPopup();
     }
@@ -11,9 +11,9 @@ const ProtectedRoute = ({ component: Component, handleLoginPopup, ...props }) =>
 
   return (
     <Route>
-      {() => (localStorage.isLoggedIn ? <Component {...props} /> : <Redirect to='/main'/>)}
+      {() => (localStorage.isLoggedIn ? <Component {...props} /> : <Redirect to="/main" />)}
     </Route>
-  )
-}
+  );
+};
 
 export default ProtectedRoute;

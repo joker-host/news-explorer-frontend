@@ -12,7 +12,7 @@ function SearchForm({ setKeyWord, onSubmitSearchForm }) {
 
   return (
     <form className="search__form" onSubmit={onSubmitSearchForm}>
-      <input className="search__form-input" placeholder="Введите тему новости" value={keyWord || ''} required onChange={handleChangeKeyWord}/>
+      <input className="search__form-input" placeholder="Введите тему новости" value={keyWord || ''} required onChange={handleChangeKeyWord} />
       <button type="submit" className="search__form-button">Искать</button>
     </form>
   );

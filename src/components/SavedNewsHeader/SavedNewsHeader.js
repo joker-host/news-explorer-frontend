@@ -13,10 +13,20 @@ function SavedNewsHeader(savedArticles) {
 
   const [keywords, setKeyWords] = useState(''); // Стейт содержит ключевые слова для статей
 
+  function deleteElemsWith(arr, str) { // удаляем из массива определенную строку
+    for (let i = arr.length - 1; i >= 0; i--) {
+      if (arr[i].includes(str)) {
+        arr.splice(i, 1)
+      }
+    }
+    return arr;
+  }
+
   useEffect(() => {
-    if(savedArticles.savedArticles.length > 0) {
+    if (savedArticles.savedArticles.length > 0) {
       const words = savedArticles.savedArticles.map((article) => (article.keyword)); // Забираем в массив все ключевые слова из статей
-      const uniqueWords = words.filter((item, pos) => words.indexOf(item) == pos); // Удаляем повторяющиеся ключевые слова в массиве
+      const uniqueWordsReplace = words.filter((item, pos) => words.indexOf(item) == pos); // Удаляем повторяющиеся ключевые слова в массиве
+      const uniqueWords = deleteElemsWith(uniqueWordsReplace, 'Без ключевого слова');
       setKeyWords(uniqueWords);
     }
   }, [savedArticles]);
@@ -26,12 +36,20 @@ function SavedNewsHeader(savedArticles) {
       <h2 className="saved-news-info__title">Сохранённые статьи</h2>
       <h3 className="saved-news-info__quantity">
         {
-          `${currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}, у вас ${savedArticles.savedArticles.length > 0 ? savedArticles.savedArticles.length : 'пока еще нет '} ${declOfNum(savedArticles.savedArticles.length, ['сохраненная', 'сохраненные', 'сохраненных'])} ${declOfNum(savedArticles.savedArticles.length, ['статья', 'статьи', 'статей'])}`
+          `${currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}, у Вас ${savedArticles.savedArticles.length > 0 ? savedArticles.savedArticles.length : 'пока еще нет '} ${declOfNum(savedArticles.savedArticles.length, ['сохраненная', 'сохраненные', 'сохраненных'])} ${declOfNum(savedArticles.savedArticles.length, ['статья', 'статьи', 'статей'])}`
         }
       </h3>
       {
         savedArticles.savedArticles.length > 0
-          ? <p className="saved-news-info__description">По ключевым словам: <span className="saved-news-info__bold">{keywords.length < 4 ? keywords[0] + (keywords[1] ? `, ${keywords[1]}` : '') + (keywords[2] ? `, ${keywords[2]}` : '') : `${keywords[0]}, ${keywords[1]}`}</span>{keywords.length > 3 ? ' и ' : ''}{keywords.length > 3 ? <span className="saved-news-info__bold">{`${keywords.length - 2}-м `}</span> : ''}{keywords.length > 3 ? 'другим' : ''}</p>
+          ? (
+            <p className="saved-news-info__description">
+              По ключевым словам:&ensp;
+              <span className="saved-news-info__bold">{keywords.length < 4 ? keywords[0] + (keywords[1] ? `, ${keywords[1]}` : '') + (keywords[2] ? `, ${keywords[2]}` : '') : `${keywords[0]}, ${keywords[1]}`}</span>
+              {keywords.length > 3 ? ' и ' : ''}
+              {keywords.length > 3 ? <span className="saved-news-info__bold">{`${keywords.length - 2}-м `}</span> : ''}
+              {keywords.length > 3 ? 'другим' : ''}
+            </p>
+          )
           : ''
       }
     </section>

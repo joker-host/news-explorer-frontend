@@ -9,7 +9,7 @@ function Search({ setKeyWord, onSubmitSearchForm }) {
       <div className="search__wrapper">
         <h2 className="search__title">Что творится в мире?</h2>
         <p className="search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
-        <SearchForm setKeyWord={setKeyWord} onSubmitSearchForm={onSubmitSearchForm}/>
+        <SearchForm setKeyWord={setKeyWord} onSubmitSearchForm={onSubmitSearchForm} />
       </div>
     </section>
   );

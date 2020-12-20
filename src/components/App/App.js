@@ -77,6 +77,13 @@ function App() {
 
   const [keyWord, setKeyWord] = useState(''); // Стейт с ключевыми словами для статей
   const [articles, setArticles] = useState({ articlesArr: [], showSection: false }); // Статьи, полученные при запросе от NewsApi
+  
+  useEffect(() => { // проверяю есть ли в локальном хранилище ключ articles, если есть, то забираю его в стейт articles
+    if (localStorage.getItem('articles')) {
+      setArticles(JSON.parse(localStorage.getItem('articles')));
+    }
+  }, []);
+
   const [showNoResults, setShowNoResults] = useState(false);
   function onSubmitSearchForm(e) {
     setIsLoading(true);
@@ -84,7 +91,7 @@ function App() {
     newsApi
       .getArticles(keyWord)
       .then((res) => {
-        if(res.totalResults === 0) {
+        if (res.totalResults === 0) {
           setShowNoResults(true);
         } else {
           setShowNoResults(false);
@@ -276,7 +283,7 @@ function App() {
       <div className="body">
         <Switch>
           <Route path="/main">
-            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} logOut={logOut}/>
+            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} logOut={logOut} />
             <Main
               setKeyWord={setKeyWord}
               keyWord={keyWord}
@@ -292,9 +299,9 @@ function App() {
             <Footer />
           </Route>
           <Route path="/saved-news">
-            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} logOut={logOut}/>
+            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} logOut={logOut} />
             <ProtectedRoute
-              path='/saved-news'
+              path="/saved-news"
               loggedIn={loggedIn}
               component={SavedNews}
               articles={articles}
@@ -305,10 +312,10 @@ function App() {
             />
             <Footer />
             {
-              loggedIn ? '' : <Redirect from='/saved-news' to='/main' />
+              loggedIn ? '' : <Redirect from="/saved-news" to="/main" />
             }
           </Route>
-          <Redirect from='/' to='/main' />
+          <Redirect from="/" to="/main" />
         </Switch>
         <RegisterPopup
           isOpen={isRegisterPopupOpen}

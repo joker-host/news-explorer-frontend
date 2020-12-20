@@ -22,19 +22,20 @@ function Header({
             <h1 className="header__title">NewsExplorer</h1>
           </Link>
           <div className="header__nav-bar">
-            <img className="header__menu" src={menu_white} onClick={onBurgerMenu} alt="здесь должна быть кнопка открытия меню"></img>
+            <img className="header__menu" src={menu_white} onClick={onBurgerMenu} alt="здесь должна быть кнопка открытия меню" />
             <Link className="header__link header__link_current-page" to="/main">
-              <div className="header__underline"></div>
+              <div className="header__underline" />
               Главная
             </Link>
             {loggedIn ? <Link className="header__link" to="/saved-news">Сохраненные статьи</Link> : ''}
             {loggedIn
-              ? <button type='button' className="header__logged-out-button_white" onClick={logOut}>
-                {currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}
-                <img className="header__logged-out-image" src={logout_white} alt="здесь должна быть иконка выхода из аккаунта"></img>
-              </button>
-              : <button type='button' className="header__logged-in-button" onClick={onRegister}>Авторизоваться</button>
-            }
+              ? (
+                <button type="button" className="header__logged-out-button_white" onClick={logOut}>
+                  {currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}
+                  <img className="header__logged-out-image" src={logout_white} alt="здесь должна быть иконка выхода из аккаунта" />
+                </button>
+              )
+              : <button type="button" className="header__logged-in-button" onClick={onRegister}>Авторизоваться</button>}
           </div>
         </header>
       </Route>
@@ -44,15 +45,15 @@ function Header({
             <h1 className="header__title">NewsExplorer</h1>
           </Link>
           <div className="header__nav-bar">
-            <img className="header__menu" src={menu_black} onClick={onBurgerMenu} alt="здесь должна быть кнопка открытия меню"></img>
+            <img className="header__menu" src={menu_black} onClick={onBurgerMenu} alt="здесь должна быть кнопка открытия меню" />
             <Link className="header__link" to="/main">Главная</Link>
             <Link className="header__link header__link_current-page" to="/saved-news">
-              <div className="header-white__underline"></div>
+              <div className="header-white__underline" />
               Сохраненные статьи
             </Link>
-            <button type='button' className="header__logged-out-button" onClick={logOut}>
+            <button type="button" className="header__logged-out-button" onClick={logOut}>
               {currentUserName.charAt(0).toUpperCase() + currentUserName.slice(1)}
-              <img className="header__logged-out-image" src={logout} alt="здесь должна быть иконка выхода из аккаунта"></img>
+              <img className="header__logged-out-image" src={logout} alt="здесь должна быть иконка выхода из аккаунта" />
             </button>
           </div>
         </header>

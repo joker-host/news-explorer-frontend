@@ -35,7 +35,6 @@ function NewsCard({
     } else {
       setActiveFlag(false);
     }
-    
   }, [savedArticles, cardTitle, activeFlag, loggedIn]);
 
   const keyWordForSave = localStorage.getItem('keyWordForSave') || 'Без ключевого слова';
@@ -107,7 +106,7 @@ function NewsCard({
       <Switch>
         <Route path="/main">
           <div className="search-results__save-button-wrapper">
-            <button type='button' className={activeFlag ? 'search-results__save-button-active' : 'search-results__save-button'} disabled={!loggedIn} onClick={modifyArticle}></button>
+            <button type="button" className={activeFlag ? 'search-results__save-button-active' : 'search-results__save-button'} disabled={!loggedIn} onClick={modifyArticle} />
             <div className="search-results__save-button-description">
               <p className="search-results__save-button-description-text">Войдите, чтобы сохранять статьи</p>
             </div>
@@ -118,7 +117,7 @@ function NewsCard({
             <p className="search-results__card-text">{keyWord}</p>
           </div>
           <div className="search-results__save-button-wrapper">
-            <button type='button' className="search-results__save-button search-results__delete" onClick={modifyArticle}></button>
+            <button type="button" className="search-results__save-button search-results__delete" onClick={modifyArticle} />
             <div className="search-results__save-button-description">
               <p className="search-results__save-button-description-text">Убрать из сохранённых</p>
             </div>
@@ -126,17 +125,18 @@ function NewsCard({
         </Route>
       </Switch>
 
-      <img className="search-results__image"
+      <img
+        className="search-results__image"
         src={cardImage}
         alt="здесь должна быть картинка для новости :)"
-        onError={(e) => { e.target.src = 'https://avatars.mds.yandex.net/get-zen_doc/1132604/pub_5fbf9b271080732360f5473b_5fbf9bc9b1f92632ba86f7bb/scale_2400'; }}>
-      </img>
+        onError={(e) => { e.target.src = 'https://avatars.mds.yandex.net/get-zen_doc/1132604/pub_5fbf9b271080732360f5473b_5fbf9bc9b1f92632ba86f7bb/scale_2400'; }}
+      />
       <div className="search-results__card-wrapper">
-        <a className="search-results__card-link" href={onClickArticle} target="_blank" rel="noreferrer"></a>
+        <a className="search-results__card-link" href={onClickArticle} target="_blank" rel="noreferrer" />
         <p className="search-results__date">{moment(cardDate).format('LL').slice(0, -3)}</p>
         <h3 className="search-results__card-title">{cardTitle}</h3>
         {/* <p className="search-results__card-description">{cardDescription.replace(/[<>olli]/)}</p> */}
-        <p className="search-results__card-description">{cardDescription}</p>
+        <p className="search-results__card-description">{cardDescription.replace(/[<>olli/]/g, '')}</p>
         <p className="search-results__card-source">{cardTag}</p>
       </div>
     </div>

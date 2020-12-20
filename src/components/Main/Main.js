@@ -17,24 +17,22 @@ function Main({
   loggedIn,
   savedArticles,
   setSavedArticles,
-  showNoResults
+  showNoResults,
 }) {
   return (
     <main className="content">
       <Search setKeyWord={setKeyWord} onSubmitSearchForm={onSubmitSearchForm} />
-      {isLoading ?
-        <Preloader />
-        :
-        articles.articlesArr.length > 0 ?
-          <SearchResult
-            articles={articles}
-            setArticles={setArticles}
-            loggedIn={loggedIn}
-            keyWord={keyWord}
-            savedArticles={savedArticles}
-            setSavedArticles={setSavedArticles}
-          />
-          : ''
+      {isLoading ? <Preloader /> : ''}
+      {articles.articlesArr.length > 0 ? 
+        <SearchResult
+          articles={articles}
+          setArticles={setArticles}
+          loggedIn={loggedIn}
+          keyWord={keyWord}
+          savedArticles={savedArticles}
+          setSavedArticles={setSavedArticles}
+        />
+        : ''
       }
       {showNoResults ? <NoResults /> : ''}
       <About />

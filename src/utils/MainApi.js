@@ -28,7 +28,7 @@ class MainApi {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data.token) {
+        if (data.token) {
           localStorage.setItem('jwt', data.token);
         }
         return data;
