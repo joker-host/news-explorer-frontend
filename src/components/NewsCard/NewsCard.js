@@ -2,7 +2,7 @@ import './NewsCard.css';
 
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { mainApi } from '../../utils/MainApi.js';
+import { mainApi } from '../../utils/MainApi';
 import 'moment/locale/ru';
 
 const moment = require('moment');
@@ -22,8 +22,12 @@ function NewsCard({
   savedArticles,
   setSavedArticles,
 }) {
-  const [activeFlag, setActiveFlag] = useState(false); // Стейт содержит информацию о том, сохранена ли статья пользователем
-  useEffect(() => { // Проверка, если статья найдена в массиве сохраненных статей пользователя, то перекрашиваем цвет флага в синий
+  const [activeFlag, setActiveFlag] = useState(false);
+  // Стейт содержит информацию о том, сохранена ли статья пользователем
+
+  useEffect(() => {
+  // Проверка, если статья найдена в массиве сохраненных статей пользователя,
+  // то перекрашиваем цвет флага в синий
     if (loggedIn) {
       if (savedArticles.length > 0) {
         setActiveFlag(
@@ -45,7 +49,7 @@ function NewsCard({
         cardTitle,
         cardDescription,
         cardDate,
-        cardTag,
+        cardTag === undefined ? 'Без ключевого слова' : cardTag,
         validator.isURL(onClickArticle) ? onClickArticle : 'https://www.bbc.com/russian',
         validator.isURL(cardImage)
           ? cardImage
@@ -84,15 +88,16 @@ function NewsCard({
       });
   }
 
-  function modifyArticle() { // Проверка, если статья сохранена, то удаляем. Если не сохранена, то сохраняем
+  function modifyArticle() {
+  // Проверка, если статья сохранена, то удаляем. Если не сохранена, то сохраняем
     const savedArticle = savedArticles.find((i) => {
       if (myArticle) {
         return i.title === myArticle.title && i.text === myArticle.text;
       }
-
       if (article) {
         return i.title === article.title && i.text === article.description;
       }
+      return undefined;
     });
     if (savedArticle) {
       deleteArticle(savedArticle._id);
@@ -106,7 +111,13 @@ function NewsCard({
       <Switch>
         <Route path="/main">
           <div className="search-results__save-button-wrapper">
-            <button type="button" className={activeFlag ? 'search-results__save-button-active' : 'search-results__save-button'} disabled={!loggedIn} onClick={modifyArticle} />
+            <button
+              type="button"
+              className={activeFlag ? 'search-results__save-button-active' : 'search-results__save-button'}
+              aria-label="Сохранить"
+              disabled={!loggedIn}
+              onClick={modifyArticle}
+            />
             <div className="search-results__save-button-description">
               <p className="search-results__save-button-description-text">Войдите, чтобы сохранять статьи</p>
             </div>
@@ -117,7 +128,12 @@ function NewsCard({
             <p className="search-results__card-text">{keyWord}</p>
           </div>
           <div className="search-results__save-button-wrapper">
-            <button type="button" className="search-results__save-button search-results__delete" onClick={modifyArticle} />
+            <button
+              type="button"
+              className="search-results__save-button search-results__delete"
+              aria-label="Удалить"
+              onClick={modifyArticle}
+            />
             <div className="search-results__save-button-description">
               <p className="search-results__save-button-description-text">Убрать из сохранённых</p>
             </div>
@@ -132,12 +148,12 @@ function NewsCard({
         onError={(e) => { e.target.src = 'https://avatars.mds.yandex.net/get-zen_doc/1132604/pub_5fbf9b271080732360f5473b_5fbf9bc9b1f92632ba86f7bb/scale_2400'; }}
       />
       <div className="search-results__card-wrapper">
-        <a className="search-results__card-link" href={onClickArticle} target="_blank" rel="noreferrer" />
-        <p className="search-results__date">{moment(cardDate).format('LL').slice(0, -3)}</p>
-        <h3 className="search-results__card-title">{cardTitle}</h3>
-        {/* <p className="search-results__card-description">{cardDescription.replace(/[<>olli]/)}</p> */}
-        <p className="search-results__card-description">{cardDescription.replace(/[<>olli/]/g, '')}</p>
-        <p className="search-results__card-source">{cardTag}</p>
+        <a className="search-results__card-link" href={onClickArticle} target="_blank" rel="noreferrer">
+          <p className="search-results__date">{moment(cardDate).format('LL').slice(0, -3)}</p>
+          <h3 className="search-results__card-title">{cardTitle}</h3>
+          <p className="search-results__card-description">{cardDescription.replace(/[<>olli/]/g, '')}</p>
+          <p className="search-results__card-source">{cardTag}</p>
+        </a>
       </div>
     </div>
   );

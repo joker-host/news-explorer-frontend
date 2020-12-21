@@ -10,7 +10,12 @@ function SavedNews({
   return (
     <main className="content">
       <SavedNewsHeader savedArticles={savedArticles} />
-      <SearchResult articles={articles} setArticles={setArticles} savedArticles={savedArticles} setSavedArticles={setSavedArticles} />
+      <SearchResult
+        articles={articles}
+        setArticles={setArticles}
+        savedArticles={savedArticles}
+        setSavedArticles={setSavedArticles}
+      />
     </main>
   );
 }

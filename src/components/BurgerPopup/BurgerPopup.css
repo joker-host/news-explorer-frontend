@@ -57,7 +57,16 @@
 
 .burger-popup__close-button {
     cursor: pointer;
+    background: url(../../images/close.svg);
+    background-position: center center;
+    background-size: 24px 24px;
+    border: none;
 }
+
+.burger-popup__close-button:focus {
+   outline: none;
+}
+
 
 .burger-popup__navbar {
     height: 230px;

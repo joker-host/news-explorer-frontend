@@ -23,17 +23,18 @@ function Main({
     <main className="content">
       <Search setKeyWord={setKeyWord} onSubmitSearchForm={onSubmitSearchForm} />
       {isLoading ? <Preloader /> : ''}
-      {articles.articlesArr.length > 0 ? 
-        <SearchResult
-          articles={articles}
-          setArticles={setArticles}
-          loggedIn={loggedIn}
-          keyWord={keyWord}
-          savedArticles={savedArticles}
-          setSavedArticles={setSavedArticles}
-        />
-        : ''
-      }
+      {articles.articlesArr.length > 0 && !isLoading
+        ? (
+          <SearchResult
+            articles={articles}
+            setArticles={setArticles}
+            loggedIn={loggedIn}
+            keyWord={keyWord}
+            savedArticles={savedArticles}
+            setSavedArticles={setSavedArticles}
+          />
+        )
+        : ''}
       {showNoResults ? <NoResults /> : ''}
       <About />
     </main>

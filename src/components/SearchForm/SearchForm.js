@@ -5,7 +5,8 @@ import React from 'react';
 function SearchForm({ setKeyWord, onSubmitSearchForm }) {
   const keyWord = localStorage.getItem('Key word'); // Ключевое слово в локальном хранилище
 
-  function handleChangeKeyWord(e) { // Меняем запись ключевого слова поиска при изменении значения в инпуте
+  function handleChangeKeyWord(e) {
+    // Меняем запись ключевого слова поиска при изменении значения в инпуте
     setKeyWord(e.target.value);
     localStorage.setItem('Key word', e.target.value);
   }

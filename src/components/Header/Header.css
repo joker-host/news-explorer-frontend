@@ -14,6 +14,37 @@
 .header__menu {
     cursor: pointer;
     display: none;
+    background-image: url(../../images/menu_white.svg);
+    background-color: transparent;
+    border: none;
+    width: 24px;
+    height: 24px;
+}
+
+.header__menu:active {
+    outline: none;
+}
+
+.header__menu:focus {
+    outline: none;
+}
+
+.header__menu_white {
+    cursor: pointer;
+    display: none;
+    background-image: url(../../images/menu_black.svg);
+    background-color: transparent;
+    border: none;
+    width: 24px;
+    height: 24px;
+}
+
+.header__menu_white:active {
+    outline: none;
+}
+
+.header__menu_white:focus {
+    outline: none;
 }
 
 .header__logo {
@@ -285,6 +316,10 @@
     }
 
     .header__menu {
+        display: block;
+    }
+
+    .header__menu_white {
         display: block;
     }
 

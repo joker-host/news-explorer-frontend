@@ -140,31 +140,26 @@
 
 .search-results__image {
     object-fit: cover;
-    /* object-position: left top; */
+    object-position: left top;
     height: 272px;
     border-radius: 8px 8px 0 0;
 }
 
 .search-results__card-wrapper {
-    position: relative;
-    min-height: 304px;
-    display: flex;
-    flex-direction: column;
+    min-height: 360px;
     
-    
-    text-decoration: none;
     padding: 20px 24px 20px 24px;
     background-color: #FFFFFF;
     border-radius: 0 0 8px 8px;
-    /* border: 1px solid red; */
 }
 
 .search-results__card-link {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    text-decoration: none;
+    position: relative;
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .search-results__date {
@@ -178,7 +173,7 @@
 }
 
 .search-results__card-title {
-    min-height: 60px;
+    min-height: 120px;
     margin: 0;
     margin-bottom: 16px;
     color: #1A1B22;
@@ -192,7 +187,7 @@
     display: -moz-box;
     -moz-box-orient: vertical;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 

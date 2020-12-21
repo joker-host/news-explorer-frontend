@@ -10,7 +10,7 @@ function PopupWithForm({
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
         {children}
-        <button type="button" className={`popup__close-icon popup__close-icon_${name}`} onClick={onClose} />
+        <button type="button" className={`popup__close-icon popup__close-icon_${name}`} aria-label="Закрыть" onClick={onClose} />
         {loginOrRegister}
       </div>
     </div>

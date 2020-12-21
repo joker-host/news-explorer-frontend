@@ -8,42 +8,35 @@ import NewsCard from '../NewsCard/NewsCard';
 function SearchResult({
   articles, setArticles, loggedIn, savedArticles, setSavedArticles,
 }) {
-  const [esleButtonShow, setEsleButtonShow] = useState(true); // Стейт показывающий или скрывающий кнопку "Показать еще"
+  const [esleButtonShow, setEsleButtonShow] = useState(true);
+  // Стейт показывающий или скрывающий кнопку "Показать еще"
 
-  function checkArrayLength() { // Проверка массива статей, если отрисованы все, убираем кнопку "Показать еще"
+  function checkArrayLength() {
+    // Проверка массива статей, если отрисованы все, убираем кнопку "Показать еще"
     if (articles.itemToShow >= articles.articlesArr.length) {
       setEsleButtonShow(false);
     }
   }
 
-  // function getTopCoords() {
-  //   window
-  // }
-
-  const scrollHeight = Math.max(
-    document.body.scrollHeight, document.documentElement.scrollHeight,
-    document.body.offsetHeight, document.documentElement.offsetHeight,
-    document.body.clientHeight, document.documentElement.clientHeight
-  );
-
-  const getScrollOffsets = function (w) { // Функция определяет текущее положение полосы прокрутки страницы
-    w = w || window;
-    if (w.pageXOffset != null)
-      return { x: w.pageXOffset, y: w.pageYOffset };
+  const getScrollOffsets = function () {
+    // Функция определяет текущее положение полосы прокрутки страницы
+    const w = window;
+    if (w.pageXOffset != null) return { x: w.pageXOffset, y: w.pageYOffset };
     const d = w.document;
-    if (document.compatMode == 'CSS1Compat')
+    if (document.compatMode == 'CSS1Compat') {
       return {
         x: d.documentElement.scrollLeft,
-        y: d.documentElement.scrollTop
+        y: d.documentElement.scrollTop,
       };
+    }
     return { x: d.body.scrollLeft, y: d.body.scrollTop };
-  }
-
-
+  };
 
   function showMore() { // Функция отрисовки трех дополнительных карточек
     checkArrayLength();
-    setArticles({ articlesArr: articles.articlesArr, itemToShow: articles.itemToShow + 3, showSection: true });
+    setArticles({
+      articlesArr: articles.articlesArr, itemToShow: articles.itemToShow + 3, showSection: true,
+    });
     checkArrayLength(); // Пролистать страницу наверх
     window.scrollTo({
       top: getScrollOffsets().y - 300, // текущее положение страницы прокрутки минус 300 пикселей
@@ -89,7 +82,7 @@ function SearchResult({
                 }
               </div>
               {
-                esleButtonShow ? <button className="search-results__else-news-button" onClick={showMore}>Показать еще</button> : ''
+                esleButtonShow ? <button type="button" className="search-results__else-news-button" onClick={showMore}>Показать еще</button> : ''
               }
             </section>
           )

@@ -146,6 +146,19 @@
     left: 0;
 }
 
+.popup__input-password-error {
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    display: block;
+    color: #ff0000;
+    margin: 0;
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+}
+
 .popup__input-container {
     display: flex;
     flex-direction: column;
@@ -161,6 +174,7 @@
 }
 
 .popup__link {
+    cursor: pointer;
     background: transparent;
     font-family: 'Inter', Arial, sans-serif;
     font-weight: 500;
@@ -169,20 +183,20 @@
     text-align: center;
     margin: 0;
     border: none;
+    transition: opacity 0.3s ease;
 }
 
 .popup__link:focus {
     outline: none;
 }
 
+.popup__link:hover {
+    opacity: .7;
+}
+
 .popup__another-popup {
     color: #2F71E5;
     cursor: pointer;
-    transition: opacity 0.3s ease;
-}
-
-.popup__another-popup:hover {
-    opacity: .7;
 }
 
 @media (max-width: 550px) {

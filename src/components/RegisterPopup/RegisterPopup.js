@@ -2,7 +2,7 @@ import './RegisterPopup.css';
 
 import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import { mainApi } from '../../utils/MainApi.js';
+import { mainApi } from '../../utils/MainApi';
 
 function RegisterPopup({
   isOpen,
@@ -32,8 +32,6 @@ function RegisterPopup({
       .then((res) => {
         if (res.success) {
           onClose();
-        } else {
-          console.log(res);
         }
         setRegisterMessage(res);
         setIsToolipPopupOpen(true);
@@ -50,9 +48,9 @@ function RegisterPopup({
       isOpen={isOpen}
       onClose={onClose}
       loginOrRegister={(
-        <button type="button" className="popup__link">
+        <button type="button" className="popup__link" onClick={onToggle}>
           или&nbsp;
-          <span className="popup__another-popup" onClick={onToggle}>
+          <span className="popup__another-popup">
             Войти
           </span>
         </button>
@@ -60,9 +58,10 @@ function RegisterPopup({
     >
       <form action="#" method="POST" name="form" className={`popup__form popup__form_${name}`} onSubmit={handleSubmit} noValidate>
         <div className="popup__input-container">
-          <label className="popup__input-label">
+          <label className="popup__input-label" htmlFor="input__email">
             <p className="popup__label-text">Email</p>
             <input
+              id="input__email"
               type="text"
               name="email"
               className="popup__form-input"
@@ -76,9 +75,10 @@ function RegisterPopup({
             {(emailError && emailDirty) && <span id="email-input-error" className="popup__input-error">{emailError}</span>}
           </label>
 
-          <label className="popup__input-label">
+          <label className="popup__input-label" htmlFor="input__password">
             <p className="popup__label-text">Пароль</p>
             <input
+              id="input__password"
               type="password"
               name="password"
               className="popup__form-input"
@@ -94,9 +94,10 @@ function RegisterPopup({
             {(passwordError && passwordDirty) && <span id="email-input-error" className="popup__input-error">{passwordError}</span>}
           </label>
 
-          <label className="popup__input-label">
+          <label className="popup__input-label" htmlFor="input__name">
             <p className="popup__label-text">Имя</p>
             <input
+              id="input__name"
               type="text"
               name="name"
               className="popup__form-input"

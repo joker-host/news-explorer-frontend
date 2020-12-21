@@ -1,4 +1,4 @@
-import { handleResponse, baseUrl } from './constants.js';
+import { handleResponse, baseUrl } from './constants';
 
 class MainApi {
   register(email, password, name) { // Запрос на регистрацию
@@ -54,7 +54,8 @@ class MainApi {
       });
   }
 
-  saveArticle(keyword, title, text, date, source, link, image, owner) { // Запрос на сохранение статьи
+  saveArticle(keyword, title, text, date, source, link, image, owner) {
+    // Запрос на сохранение статьи
     return fetch(`${baseUrl}/articles`, {
       method: 'POST',
       // mode: 'no-cors',

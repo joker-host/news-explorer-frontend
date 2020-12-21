@@ -1,14 +1,20 @@
 import './SavedNewsHeader.css';
 
 import React, { useState, useEffect } from 'react';
-import { UserContext } from '../../contexts/CurrentUserContext.js';
+import { UserContext } from '../../contexts/CurrentUserContext';
 
 function SavedNewsHeader(savedArticles) {
   const currentUser = React.useContext(UserContext);
   const currentUserName = currentUser.name || 'Вы вышли';
 
-  function declOfNum(n, titles) { // Функция определения окончаний в словах в зависимости от числительного
-    return titles[n % 10 == 1 && n % 100 != 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
+  function declOfNum(n, titles) {
+    // Функция определения окончаний в словах в зависимости от числительного
+    return titles[
+      n % 10 == 1
+      && n % 100 != 11 ? 0 : n % 10 >= 2
+      && n % 10 <= 4
+      && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2
+    ];
   }
 
   const [keywords, setKeyWords] = useState(''); // Стейт содержит ключевые слова для статей
@@ -16,7 +22,7 @@ function SavedNewsHeader(savedArticles) {
   function deleteElemsWith(arr, str) { // удаляем из массива определенную строку
     for (let i = arr.length - 1; i >= 0; i--) {
       if (arr[i].includes(str)) {
-        arr.splice(i, 1)
+        arr.splice(i, 1);
       }
     }
     return arr;
@@ -24,8 +30,10 @@ function SavedNewsHeader(savedArticles) {
 
   useEffect(() => {
     if (savedArticles.savedArticles.length > 0) {
-      const words = savedArticles.savedArticles.map((article) => (article.keyword)); // Забираем в массив все ключевые слова из статей
-      const uniqueWordsReplace = words.filter((item, pos) => words.indexOf(item) == pos); // Удаляем повторяющиеся ключевые слова в массиве
+      const words = savedArticles.savedArticles.map((article) => (article.keyword));
+      // Забираем в массив все ключевые слова из статей
+      const uniqueWordsReplace = words.filter((item, pos) => words.indexOf(item) == pos);
+      // Удаляем повторяющиеся ключевые слова в массиве
       const uniqueWords = deleteElemsWith(uniqueWordsReplace, 'Без ключевого слова');
       setKeyWords(uniqueWords);
     }
@@ -40,7 +48,7 @@ function SavedNewsHeader(savedArticles) {
         }
       </h3>
       {
-        savedArticles.savedArticles.length > 0
+        savedArticles.savedArticles.length > 0 && keywords.length > 0
           ? (
             <p className="saved-news-info__description">
               По ключевым словам:&ensp;

@@ -5,22 +5,28 @@ import {
   Route, Switch, Redirect, useHistory,
 } from 'react-router-dom';
 import validator from 'validator';
-import Header from '../Header/Header.js';
-import Main from '../Main/Main.js';
-import Footer from '../Footer/Footer.js';
-import SavedNews from '../SavedNews/SavedNews.js';
-import RegisterPopup from '../RegisterPopup/RegisterPopup.js';
-import LoginPopup from '../LoginPopup/LoginPopup.js';
-import BurgerPopup from '../BurgerPopup/BurgerPopup.js';
-import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
-import { newsApi } from '../../utils/NewsApi.js';
-import { mainApi } from '../../utils/MainApi.js';
-import { UserContext } from '../../contexts/CurrentUserContext.js';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
+import SavedNews from '../SavedNews/SavedNews';
+import RegisterPopup from '../RegisterPopup/RegisterPopup';
+import LoginPopup from '../LoginPopup/LoginPopup';
+import BurgerPopup from '../BurgerPopup/BurgerPopup';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { newsApi } from '../../utils/NewsApi';
+import { mainApi } from '../../utils/MainApi';
+import { UserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(localStorage.isLoggedIn); // Стейт, содержащий статус пользователя (зашел в аккаунт или вышел)
-  const handleLogin = () => { // Устанавливает статус пользователя "зашел в аккаунт"
+  const [loggedIn, setLoggedIn] = useState(localStorage.isLoggedIn);
+  // Стейт, содержащий статус пользователя (зашел в аккаунт или вышел)
+
+  const [isLoading, setIsLoading] = useState(false);
+  // отобразить/убрать загрузку
+
+  const handleLogin = () => {
+    // Устанавливает статус пользователя "зашел в аккаунт"
     setLoggedIn(localStorage.isLoggedIn = true);
   };
 
@@ -30,7 +36,8 @@ function App() {
     name: '',
     _id: '',
   });
-  function tokenCheck() { // Проверяет валидность токена
+  function tokenCheck() {
+    // Проверяет валидность токена
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       mainApi
@@ -52,15 +59,18 @@ function App() {
     }
   }
 
-  function logOut() { // Функция выхода из аккаунта
-    localStorage.removeItem('jwt');
+  const [savedArticles, setSavedArticles] = useState([]);
+  // Стейт с сохраненными статьями
+
+  function logOut() {
+    // Функция выхода из аккаунта
+    localStorage.clear();
     setLoggedIn(localStorage.isLoggedIn = false);
     setSavedArticles([]);
   }
 
-  const [savedArticles, setSavedArticles] = useState([]); // Стейт с сохраненными статьями
-
-  function loadSavedArticles() { // Запрос на получение сохраненных статей
+  function loadSavedArticles() {
+    // Запрос на получение сохраненных статей
     mainApi
       .getInitialArticles()
       .then((res) => {
@@ -71,20 +81,51 @@ function App() {
       });
   }
 
-  useEffect(() => { // Запрос на получение сохраненных статей срабатывает при изменении статуса LogIn/LogOff
+  useEffect(() => {
+    // Запрос на получение сохраненных статей срабатывает при изменении статуса LogIn/LogOff
     loadSavedArticles();
   }, [loggedIn, history]);
 
-  const [keyWord, setKeyWord] = useState(''); // Стейт с ключевыми словами для статей
-  const [articles, setArticles] = useState({ articlesArr: [], showSection: false }); // Статьи, полученные при запросе от NewsApi
-  
-  useEffect(() => { // проверяю есть ли в локальном хранилище ключ articles, если есть, то забираю его в стейт articles
+  const [keyWord, setKeyWord] = useState('');
+  // Стейт с ключевыми словами для статей
+
+  const [articles, setArticles] = useState({ articlesArr: [], showSection: false });
+  // Статьи, полученные при запросе от NewsApi
+
+  useEffect(() => {
+    // проверяю есть ли в локальном хранилище ключ articles,
+    // если есть, то забираю его в стейт articles
     if (localStorage.getItem('articles')) {
       setArticles(JSON.parse(localStorage.getItem('articles')));
     }
   }, []);
 
   const [showNoResults, setShowNoResults] = useState(false);
+
+  function getStartArticles() {
+    setIsLoading(true);
+    newsApi
+      .getTopArticles()
+      .then((res) => {
+        if (res.totalResults === 0) {
+          setShowNoResults(true);
+        } else {
+          setShowNoResults(false);
+        }
+        setArticles({ articlesArr: [], showSection: false });
+        localStorage.removeItem('articles');
+        setIsLoading(false);
+        setArticles({ articlesArr: res.articles, itemToShow: 3, showSection: true });
+        localStorage.setItem('articles', JSON.stringify({ articlesArr: res.articles, itemToShow: articles.itemToShow, showSection: articles.showSection }));
+      });
+  }
+
+  useEffect(() => {
+    if (!(localStorage.getItem('articles'))) {
+      getStartArticles();
+    }
+  }, []);
+
   function onSubmitSearchForm(e) {
     setIsLoading(true);
     e.preventDefault();
@@ -105,84 +146,10 @@ function App() {
       });
   }
 
-  useEffect(() => { // Функция проверки токена срабатывает изменении статуса LogIn/LogOff
+  useEffect(() => {
+    // Функция проверки токена срабатывает изменении статуса LogIn/LogOff
     tokenCheck();
   }, [loggedIn, history]);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  // function closeOverlay(evt) { // Закрытие попапов при нажатии на область вокруг попапа
-  //   if (evt.target.classList.contains('popup_opened')) {
-  //     closeAllPopups();
-  //   }
-  // }
-  // document.addEventListener('click', closeOverlay);
-
-  function closeOnEscape(evt) { // Закрытие попапов при нажатии Escape
-    if (evt.key === 'Escape') {
-      closeAllPopups();
-    }
-  }
-  document.addEventListener('keydown', closeOnEscape);
-
-  function closeAllPopups() { // Закрывает все попапы
-    resetError();
-    setIsRegisterPopupOpen(false);
-    setIsLoginPopupOpen(false);
-    setIsBurgerPopupOpen(false);
-    document.removeEventListener('keydown', closeOnEscape);
-    // document.removeEventListener('click', closeOverlay);
-  }
-
-  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
-  function handleRegisterPopup() { // Открывает попап регистрации
-    resetError();
-    setIsRegisterPopupOpen(true);
-  }
-
-  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
-  function handleLoginPopup() { // Открывает попап логина
-    resetError();
-    setIsLoginPopupOpen(true);
-  }
-
-  function toggleLoginPopup() { // Закрывает попап логина и открывает попап регистрации
-    resetError();
-    closeAllPopups();
-    handleRegisterPopup();
-  }
-
-  function toggleRegisterPopup() { // Закрывает попап регистрации и открывает попап логина
-    resetError();
-    closeAllPopups();
-    handleLoginPopup();
-  }
-
-  const [isBurgerPopupOpen, setIsBurgerPopupOpen] = useState(false);
-  function handleBurgerPopup() { // Открывает меню на мобильных устройствах
-    setIsBurgerPopupOpen(true);
-  }
-
-  const [registerMessage, setRegisterMessage] = useState({ // Стейт содержит сообщение от Api при регистрации
-    message: '',
-    validation: {
-      body: {
-        message: '',
-      },
-    },
-  });
-
-  const [isToolipPopupOpen, setIsToolipPopupOpen] = useState(false);
-  function handleToolipPopup() { // Закрывает информационное окно
-    setIsToolipPopupOpen(false);
-  }
-
-  function toggleToolipPopup() { // Закрывает попап регистрации и открывает попап логина
-    resetError();
-    handleToolipPopup();
-    setIsLoginPopupOpen(true);
-    setIsRegisterPopupOpen(false);
-  }
 
   /// //////////////////////////////////////Валидация
   const [email, setEmail] = useState('');
@@ -278,12 +245,103 @@ function App() {
 
   /// //////////////////////////////////////Валидация
 
+  // function closeOverlay(evt) {
+  // Закрытие попапов при нажатии на область вокруг попапа
+  //   if (evt.target.classList.contains('popup_opened')) {
+  //     closeAllPopups();
+  //   }
+  // }
+  // document.addEventListener('click', closeOverlay);
+
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [isBurgerPopupOpen, setIsBurgerPopupOpen] = useState(false);
+
+  function closeAllPopups() {
+    // Закрывает все попапы
+    resetError();
+    setIsRegisterPopupOpen(false);
+    setIsLoginPopupOpen(false);
+    setIsBurgerPopupOpen(false);
+    // document.removeEventListener('keydown', closeOnEscape);
+    // document.removeEventListener('click', closeOverlay);
+  }
+
+  function closeOnEscape(evt) {
+    // Закрытие попапов при нажатии Escape
+    if (evt.key === 'Escape') {
+      closeAllPopups();
+    }
+  }
+
+  document.addEventListener('keydown', closeOnEscape);
+
+  function handleRegisterPopup() {
+    // Открывает попап регистрации
+    resetError();
+    setIsRegisterPopupOpen(true);
+  }
+
+  function handleLoginPopup() {
+    // Открывает попап логина
+    resetError();
+    setIsLoginPopupOpen(true);
+  }
+
+  function toggleLoginPopup() {
+    // Закрывает попап логина и открывает попап регистрации
+    resetError();
+    closeAllPopups();
+    handleRegisterPopup();
+  }
+
+  function toggleRegisterPopup() {
+    // Закрывает попап регистрации и открывает попап логина
+    resetError();
+    closeAllPopups();
+    handleLoginPopup();
+  }
+
+  function handleBurgerPopup() {
+    // Открывает меню на мобильных устройствах
+    setIsBurgerPopupOpen(true);
+  }
+
+  const [registerMessage, setRegisterMessage] = useState({
+    // Стейт содержит сообщение от Api при регистрации
+    message: '',
+    validation: {
+      body: {
+        message: '',
+      },
+    },
+  });
+
+  const [isToolipPopupOpen, setIsToolipPopupOpen] = useState(false);
+  function handleToolipPopup() {
+    // Закрывает информационное окно
+    setIsToolipPopupOpen(false);
+  }
+
+  function toggleToolipPopup() {
+    // Закрывает попап регистрации и открывает попап логина
+    resetError();
+    handleToolipPopup();
+    setIsLoginPopupOpen(true);
+    setIsRegisterPopupOpen(false);
+  }
+
   return (
     <UserContext.Provider value={currentUser}>
       <div className="body">
         <Switch>
           <Route path="/main">
-            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} logOut={logOut} />
+            <Header
+              onRegister={handleLoginPopup}
+              onBurgerMenu={handleBurgerPopup}
+              loggedIn={loggedIn}
+              logOut={logOut}
+            />
             <Main
               setKeyWord={setKeyWord}
               keyWord={keyWord}
@@ -299,7 +357,12 @@ function App() {
             <Footer />
           </Route>
           <Route path="/saved-news">
-            <Header onRegister={handleLoginPopup} onBurgerMenu={handleBurgerPopup} loggedIn={loggedIn} logOut={logOut} />
+            <Header
+              onRegister={handleLoginPopup}
+              onBurgerMenu={handleBurgerPopup}
+              loggedIn={loggedIn}
+              logOut={logOut}
+            />
             <ProtectedRoute
               path="/saved-news"
               loggedIn={loggedIn}
@@ -309,6 +372,7 @@ function App() {
               tokenCheck={tokenCheck}
               savedArticles={savedArticles}
               setSavedArticles={setSavedArticles}
+              handleLoginPopup={handleLoginPopup}
             />
             <Footer />
             {
