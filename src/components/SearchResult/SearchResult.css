@@ -1,0 +1,127 @@
+.search-results {
+    background-color: #F5F6F7;;
+    padding: 80px 80px 80px 80px;
+    display: grid;
+}
+
+.search-results__header {
+    margin: 0 0 64px 24px;
+    font-family: 'RobotoSlab', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+    color: #1A1B22;
+}
+
+.search-results__cards {
+    display: grid;
+    grid-template-columns: repeat(3, min-content);
+    grid-gap: 16px;
+    justify-content: center;
+    margin-bottom: 64px;
+}
+
+.search-results__else-news-button {
+    width: 288px;
+    height: 64px;
+    cursor: pointer;
+    border-radius: 80px;
+    border: none;
+    background-color: #FFFFFF;
+    transition: .3s ease;
+    margin: auto;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.search-results__else-news-button:hover {
+    opacity: 0.7;
+}
+
+.search-results__else-news-button:active {
+    opacity: 1;
+    outline: none;
+    background-color: #aaaaaa;
+}
+
+.search-results__else-news-button:focus {
+    outline: none;
+}
+
+/* media */
+/* media */
+/* media */
+
+@media (max-width: 1250px) {
+    .search-results__header {
+        margin: 0 0 64px 0;
+    }
+    .search-results__cards {
+        grid-template-columns: repeat(2, min-content);
+    }
+}
+
+@media (max-width: 900px) {
+    .search-results {
+        padding: 32px 40px 40px;
+    }
+
+    .search-results__cards {
+        grid-gap: 8px;
+    }
+
+    .search-results__header {
+        font-size: 30px;
+        line-height: 34px;
+        margin: 0 0 32px 0;
+    }
+
+    .search-results__else-news-button {
+        width: 240px;
+        height: 56px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-results__else-news-button {
+        transition: none;
+    }
+
+    .search-results__else-news-button:hover {
+        opacity: 1;
+    }
+
+    .search-results__else-news-button:active {
+        opacity: 1;
+        outline: none;
+        background-color: #FFFFFF;
+    }
+}
+
+@media (max-width: 690px) {
+    .search-results {
+        padding: 32px 16px;
+    }
+
+    .search-results__header {
+        /* max-width: 288px; */
+        width: auto;
+        text-align: center;
+    }
+
+    .search-results__cards {
+        grid-template-columns: repeat(1, min-content);
+    }
+
+    .search-results__else-news-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 320px) {
+    .search-results__header {
+        max-width: 288px;
+        text-align: left;
+    }
+}

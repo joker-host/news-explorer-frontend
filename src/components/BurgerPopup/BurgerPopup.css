@@ -1,0 +1,102 @@
+.burger-popup {
+    color: #FFFFFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.burger-popup_opened {
+    visibility: visible;
+    opacity: 1;
+}  
+
+.burger-popup__container {
+    position: relative;
+    top: -100%;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 0 0 16px 16px;
+    box-sizing: border-box;
+    /* padding: 16px 16px 24px 16px; */
+    background-color: #1A1B22;
+    transition: top 0.3s ease-in-out;
+}
+
+.burger-popup__container_opened {
+    top: 0;
+}
+
+.burger-popup__header {
+    box-sizing: border-box;
+    height: 55px;
+    border-bottom: 1px solid #C4C4C4;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.burger-popup__logo {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    font-family: 'RobotoSlab', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.burger-popup__close-button {
+    cursor: pointer;
+    background: url(../../images/close.svg);
+    background-position: center center;
+    background-size: 24px 24px;
+    border: none;
+}
+
+.burger-popup__close-button:focus {
+   outline: none;
+}
+
+
+.burger-popup__navbar {
+    height: 230px;
+    box-sizing: border-box;
+    padding: 16px 16px 24px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.burger-popup__link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 56px;
+}
+
+.burger-popup__link__logged-in-button {
+    cursor: pointer;
+    margin-top: 24px;
+    color: inherit;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: inherit;
+    border: 2px solid #FFFFFF;
+    border-radius: 100px;
+    height: 56px;
+}
+
+.burger-popup__link__logged-in-button:focus {
+    outline: none;
+}

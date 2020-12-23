@@ -1,0 +1,10 @@
+.popup__tooltip-button {
+    padding: 0;
+    cursor: pointer;
+    color: #2F71E5;
+    border: none;
+}
+
+.popup__tooltip-button:focus {
+    outline: none;
+}

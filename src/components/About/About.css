@@ -1,0 +1,129 @@
+.about-author {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+    padding: 80px 104px 0 104px;
+}
+
+.about-author__avatar-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 56px;
+}
+
+.about-author__avatar {
+    width: 465px;
+    height: 465px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.about-author__description-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-author__description-header {
+    margin: 0 0 25px 0;
+    padding: 0;
+    font-family: 'RobotoSlab', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+}
+
+.about-author__description {
+    max-width: 650px;
+    margin: 0 0 25px 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+/* media */
+/* media */
+/* media */
+
+@media (max-width: 1280px) {
+    .about-author {
+        padding: 80px 60px 0 60px;
+    }
+    
+    .about-author__avatar {
+        width: 420px;
+        height: 420px;
+    }
+
+    .about-author__description-header {
+        font-size: 30px;
+        line-height: 40px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .about-author__description {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
+@media (max-width: 850px) {
+    .about-author {
+        margin-bottom: 60px;
+        padding: 40px 40px 0 40px;
+    }
+
+    .about-author__avatar-wrapper {
+        margin-right: 32px;
+    }
+
+    .about-author__avatar {
+        width: 232px;
+        height: 232px;
+    }
+
+    .about-author__description-header {
+        margin: 0 0 16px 0;
+    }
+}
+
+@media (max-width: 740px) {
+    .about-author {
+        flex-direction: column;
+    }
+
+    .about-author__avatar-wrapper {
+        align-self: center;
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+
+    .about-author__avatar {
+        width: 272px;
+        height: 272px;
+    }
+
+    .about-author__description-header {
+        text-align: center;
+    }
+
+    .about-author__description:last-of-type {
+        margin-bottom: 0;
+    }
+    
+}
+
+@media (max-width: 690px) {
+    .about-author {
+        margin-bottom: 0;
+        padding: 32px 16px 80px;
+    }
+}
+
+@media (max-width: 420px) {
+    .about-author__description-header {
+        text-align: left;
+    }  
+}

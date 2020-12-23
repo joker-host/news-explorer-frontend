@@ -1,0 +1,156 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 104px 0 104px;
+    height: 80px;
+}
+
+.footer__description {
+    height: 20px;
+    margin: 0;
+    color: #B6BCBF;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    position: relative;
+    top: 2px;
+}
+
+.footer__container {
+    display: flex;
+}
+
+.footer__link {
+    margin: 0;
+    height: 20px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer__link_text {
+    margin-right: 30px;
+    color: #1A1B22;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    transition: .3s ease;
+}
+
+.footer__link_text:hover {
+    opacity: .7;
+}
+
+.footer__link_indent {
+    margin-left: 28px;
+}
+
+.footer__link-image {
+    height: 20px;
+    transition: .3s ease;
+}
+
+.footer__link-image:hover {
+    opacity: .7;
+}
+
+/* media */
+/* media */
+/* media */
+
+@media (max-width: 1280px) {
+    .footer {
+        padding: 0 60px 0 60px;
+    }
+}
+
+@media (max-width: 850px) {
+    .footer {
+        height: 64px;
+        padding: 0 40px 0 40px;
+    }
+
+    .footer__link_text {
+        margin-right: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer__link_text:hover {
+        opacity: 1;
+    }
+
+    .footer__link_text:hover {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 740px) {
+    .footer {
+        height: auto;
+        padding: 20px 16px 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer__link_text {
+        margin-right: 13px;
+    }
+
+    .footer__container {
+        width: 650px;
+        order: -1;
+    }
+
+    .footer__description {
+        order: 0;
+    }
+
+    .footer__link:nth-of-type(1) {
+        grid-area: main;
+    }
+
+    .footer__link:nth-of-type(2) {
+        grid-area: link_yandex;
+        
+    }
+    .footer__link:nth-of-type(3) {
+        grid-area: logo_github;
+        justify-self: end;
+    }
+
+    .footer__link_indent {
+        grid-area: logo_facebook;
+        justify-self: end;
+    }
+
+    .footer__container {
+        display: grid;
+        grid-template-columns: 3fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+        'main logo_github logo_facebook'
+        'link_yandex . .';
+        grid-row-gap: 35px;
+        margin-bottom: 40px;
+    }
+}
+
+
+@media (max-width: 670px) {
+    .footer__container {
+        width: 550px;
+    }
+}
+
+@media (max-width: 590px) {
+    .footer__container {
+        width: 450px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer__container {
+        width: auto;
+    }
+}
