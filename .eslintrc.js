@@ -24,7 +24,7 @@ module.exports = {
     'default-case': 0,
     'react/jsx-props-no-spreading': 'off',
     'no-nested-ternary': 'off',
-    'eqeqeq': 'off',
+    eqeqeq: 'off',
     'no-plusplus': 'off',
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',

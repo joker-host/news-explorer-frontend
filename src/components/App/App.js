@@ -64,7 +64,8 @@ function App() {
 
   function logOut() {
     // Функция выхода из аккаунта
-    localStorage.clear();
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('articles');
     setLoggedIn(localStorage.isLoggedIn = false);
     setSavedArticles([]);
   }

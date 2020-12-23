@@ -151,7 +151,7 @@ function NewsCard({
         <a className="search-results__card-link" href={onClickArticle} target="_blank" rel="noreferrer">
           <p className="search-results__date">{moment(cardDate).format('LL').slice(0, -3)}</p>
           <h3 className="search-results__card-title">{cardTitle}</h3>
-          <p className="search-results__card-description">{cardDescription.replace(/[<>olli/]/g, '')}</p>
+          <p className="search-results__card-description">{cardDescription ? cardDescription.replace(/[<>olli/]/g, '') : ''}</p>
           <p className="search-results__card-source">{cardTag}</p>
         </a>
       </div>
