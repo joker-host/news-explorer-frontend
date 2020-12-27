@@ -10,7 +10,7 @@ function Search({ setKeyWord, onSubmitSearchForm }) {
         <h2 className="search__title">Что творится в мире?</h2>
         <p className="search__description">
           Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
-          А самые интересные мы отобразим сразу.
+          А самые свежие и интересные смотрите сразу.
         </p>
         <SearchForm setKeyWord={setKeyWord} onSubmitSearchForm={onSubmitSearchForm} />
       </div>

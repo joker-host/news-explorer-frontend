@@ -58,10 +58,10 @@ function RegisterPopup({
     >
       <form action="#" method="POST" name="form" className={`popup__form popup__form_${name}`} onSubmit={handleSubmit} noValidate>
         <div className="popup__input-container">
-          <label className="popup__input-label" htmlFor="input__email">
+          <label className="popup__input-label" htmlFor="input__email_reg">
             <p className="popup__label-text">Email</p>
             <input
-              id="input__email"
+              id="input__email_reg"
               type="text"
               name="email"
               className="popup__form-input"
@@ -75,10 +75,10 @@ function RegisterPopup({
             {(emailError && emailDirty) && <span id="email-input-error" className="popup__input-error">{emailError}</span>}
           </label>
 
-          <label className="popup__input-label" htmlFor="input__password">
+          <label className="popup__input-label" htmlFor="input__password_reg">
             <p className="popup__label-text">Пароль</p>
             <input
-              id="input__password"
+              id="input__password_reg"
               type="password"
               name="password"
               className="popup__form-input"
